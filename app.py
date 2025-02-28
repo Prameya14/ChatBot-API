@@ -22,11 +22,18 @@ def get_Chat_response(text):
 
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
-        api_key="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",
+        api_key="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",
     )
 
     completion = client.chat.completions.create(
-        model="deepseek/deepseek-r1:free",
+        extra_headers={
+            # Optional. Site URL for rankings on openrouter.ai.
+            "HTTP-Referer": "<YOUR_SITE_URL>",
+            # Optional. Site title for rankings on openrouter.ai.
+            "X-Title": "<YOUR_SITE_NAME>",
+        },
+        extra_body={},
+        model="deepseek/deepseek-r1-distill-llama-70b:free",
         messages=[
             {
                 "role": "user",
